@@ -1,0 +1,19 @@
+- include_vars:
+    file: ../vars/access_port.yml
+
+- name: Create access port interface
+  ios_config:
+    lines:
+      - description {{ item.value.access_desc }}
+      - switchport mode access
+      - no switchport access vlan 999
+      - switchport access vlan {{ item.value.vlan_id }}
+      - switchport port-security mac-address {{ item.value.mac_addr }}
+      - switchport port-security
+      - switchport port-security violation shutdown
+      - spanning-tree portfast
+      - spanning-tree guard root
+      - no cdp enable
+      - no shutdown
+    parents: interface {{ item.key }}   
+  loop: "{{ lookup('dict', int_list, wantlist=True) }}"

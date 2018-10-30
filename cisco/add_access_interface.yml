@@ -1,0 +1,7 @@
+---
+- hosts: scn-wc38
+  roles:
+    - ios_config
+  tasks:
+    - include_vars: roles/ios_config/vars/creds.yml
+    - import_tasks: roles/ios_config/tasks/add_access_interface.yml
