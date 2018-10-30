@@ -1,0 +1,6 @@
+---
+- hosts: scnas01
+  roles:
+    - ios_command
+  tasks:
+    - import_tasks: roles/ios_command/tasks/show_run_int.yml
