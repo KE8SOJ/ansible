@@ -1,0 +1,9 @@
+- include_vars:
+    file: ../vars/int.yml
+
+- name: Show Interface
+  ios_command:
+    commands: show running-config | section interface "{{ int_id }}"
+  register: output
+
+- debug: msg="{{ output.stdout_lines }}"
